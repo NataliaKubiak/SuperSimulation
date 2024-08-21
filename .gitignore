@@ -1,0 +1,33 @@
+# Java
+*.class
+
+# Gradle
+/.gradle/
+/build/
+/gradle-app.setting
+
+# IDEA
+/.idea/
+/*.iml
+/out/
+
+# Log files
+*.log
+
+# Ignore Gradle wrapper jar file
+/gradle/wrapper/gradle-wrapper.jar
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*.bak
+*.orig
+
+# Ignore compiled Java files
+*.jar
+*.war
+*.ear
+
+# IDE-specific files
+.vscode/
