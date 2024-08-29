@@ -1,29 +1,31 @@
 package field;
 
-import entities.Coordinates;
-import entities.Creature;
-import entities.Entity;
+import entities.*;
 
 import java.util.HashMap;
 
 public class TurnActions extends Actions {
 
-    private HashMap<Coordinates, Entity> map;
+    private HashMap<Cell, Entity> map;
 
-    public TurnActions(HashMap<Coordinates, Entity> map) {
+    public TurnActions(HashMap<Cell, Entity> map) {
         this.map = map;
     }
 
     public void oneStepForAllCreatures() {
-        HashMap<Coordinates, Entity> tempMap = new HashMap<>();
+        HashMap<Cell, Entity> tempMap = new HashMap<>();
         tempMap.putAll(map);
 
         //swap values
         //hhh.put(a, hhh.put(b, hhh.get(a)));
-        for (Coordinates xy : tempMap.keySet()) {
-            if (tempMap.get(xy) instanceof Creature creature) {
-                creature.makeMove();
-                Coordinates newXY = creature.getCoordinates();
+        for (Cell xy : tempMap.keySet()) {
+            if (tempMap.get(xy) instanceof Predator predator) {
+                predator.makeMove();
+                Cell newXY = predator.getCoordinates();
+                map.put(xy, map.put(newXY, map.get(xy)));
+            } else if (tempMap.get(xy) instanceof Herbivore herbivore) {
+                herbivore.makeMove();
+                Cell newXY = herbivore.getCoordinates();
                 map.put(xy, map.put(newXY, map.get(xy)));
             }
         }

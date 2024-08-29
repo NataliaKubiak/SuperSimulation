@@ -2,16 +2,16 @@ package entities;
 
 public class Herbivore extends Creature {
 
-    public Herbivore(Coordinates coordinates) {
+    public Herbivore(Cell cell) {
         super("\ud83d\udc30",
-                coordinates,
+                cell,
                 1,
                 100);
     }
 
     @Override
     public void makeMove() {
-        int newY = coordinates.getY() + speed;
-        coordinates.setY(newY);
+        int newX = cell.getX() + speed;
+        cell.setX(newX);
     }
 }

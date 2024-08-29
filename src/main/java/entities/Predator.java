@@ -4,9 +4,9 @@ public class Predator extends Creature {
 
     protected int attackPower;
 
-    public Predator(Coordinates coordinates) {
+    public Predator(Cell cell) {
         super("\ud83d\udc2f",
-                coordinates,
+                cell,
                 2,
                 100);
         this.attackPower = 5;
@@ -14,7 +14,7 @@ public class Predator extends Creature {
 
     @Override
     public void makeMove() {
-        int newY = coordinates.getY() + speed;
-        coordinates.setY(newY);
+        int newX = cell.getX() + speed;
+        cell.setX(newX);
     }
 }

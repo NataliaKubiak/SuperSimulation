@@ -4,14 +4,14 @@ public abstract class Entity {
 
     protected String icon;
     protected int id;
-    protected Coordinates coordinates;
+    protected Cell cell;
 
     private static int nextId = 1;
 
     public Entity(String icon,
-                  Coordinates coordinates) {
+                  Cell cell) {
         this.icon = icon;
-        this.coordinates = coordinates;
+        this.cell = cell;
         this.id = nextId++;
     }
 
@@ -23,7 +23,7 @@ public abstract class Entity {
         return id;
     }
 
-    public Coordinates getCoordinates() {
-        return coordinates;
+    public Cell getCoordinates() {
+        return cell;
     }
 }

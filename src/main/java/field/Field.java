@@ -1,15 +1,15 @@
 package field;
 
-import entities.Coordinates;
+import entities.Cell;
 import entities.Entity;
 
 import java.util.HashMap;
 
 public class Field {
 
-    private HashMap<Coordinates, Entity> map = new HashMap<>();
-    private static final int MAP_SIZE = 20;
-    private static final int ENTITIES_AMOUNT = 40;
+    private HashMap<Cell, Entity> map = new HashMap<>();
+    private static final int ENTITIES_AMOUNT = 10;
+    private static final int MAP_SIZE = 5;
 
     private InitActions initActions = new InitActions(map, MAP_SIZE, ENTITIES_AMOUNT);
     private TurnActions turnActions = new TurnActions(map);

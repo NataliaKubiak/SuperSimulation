@@ -2,8 +2,8 @@ package entities;
 
 public class Tree extends StaticObjects {
 
-    public Tree(Coordinates coordinates) {
+    public Tree(Cell cell) {
         super("\uD83C\uDF33",
-                coordinates);
+                cell);
     }
 }
