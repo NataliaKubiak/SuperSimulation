@@ -28,9 +28,9 @@ public class InitActions extends Actions {
                 Cell cell = new Cell(x, y, SIZE);
                 cell.generateNeighbourCells();
                 map.put(cell, null);
-                System.out.println("-".repeat(30));
-                System.out.println("Coordinates: x = " + x + " y = " + y);
-                System.out.println("Neighbour cells: " + cell.getNeighbourCells());
+//                System.out.println("-".repeat(30));
+//                System.out.println("Coordinates: x = " + x + " y = " + y);
+//                System.out.println("Neighbour cells: " + cell.getNeighbourCells());
             }
         }
     }

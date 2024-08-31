@@ -22,6 +22,7 @@ public class Cell {
         this.mapSize = mapSize;
     }
 
+    //TODO there is a big chance to forget this method and have errors in search
     public void generateNeighbourCells() {
         Cell cellTop = new Cell(x, y-1);
         Cell cellBottom = new Cell(x, y+1);
