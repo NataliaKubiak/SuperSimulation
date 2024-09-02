@@ -25,8 +25,7 @@ public class InitActions extends Actions {
     private void generateEmptyMap() {
         for (int y = 0; y < SIZE; y++) {
             for (int x = 0; x < SIZE; x++) {
-                Cell cell = new Cell(x, y, SIZE);
-                cell.generateNeighbourCells();
+                Cell cell = new Cell(x, y);
                 map.put(cell, null);
 //                System.out.println("-".repeat(30));
 //                System.out.println("Coordinates: x = " + x + " y = " + y);

@@ -5,7 +5,7 @@ public class Predator extends Creature {
     protected int attackPower;
 
     public Predator(Cell cell) {
-        super("\ud83d\udc2f",
+        super("tiger",
                 cell,
                 2,
                 100);

@@ -3,7 +3,7 @@ package entities;
 public class Herbivore extends Creature {
 
     public Herbivore(Cell cell) {
-        super("\ud83d\udc30",
+        super("bunny",
                 cell,
                 1,
                 100);

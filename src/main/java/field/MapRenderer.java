@@ -24,7 +24,7 @@ public class MapRenderer {
                 if (entity == null) {
                     System.out.print("..");
                 } else {
-                    System.out.print(entity.getIcon());
+                    System.out.print(renderIcon(entity.getIcon()));
                 }
             }
             System.out.println();
@@ -34,6 +34,17 @@ public class MapRenderer {
     public void moveCursorToStart() {
         for (int i = 0; i < MAP_SIZE; i++) {
             System.out.print("\u001B[A");
+        }
+    }
+
+    private String renderIcon(String iconName) {
+        switch (iconName) {
+            case "bunny": return "\ud83d\udc30";
+            case "tiger": return "\ud83d\udc2f";
+            case "grass": return "\ud83c\udf31";
+            case "tree": return "\uD83C\uDF33";
+            case "rock": return "\uD83E\uDEA8";
+            default: return "X";
         }
     }
 }
