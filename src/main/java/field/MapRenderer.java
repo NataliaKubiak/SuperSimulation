@@ -21,11 +21,7 @@ public class MapRenderer {
             for (int x = 0; x < MAP_SIZE; x++) {
                 Entity entity = map.get(new Cell(x, y));
 
-                if (entity == null) {
-                    System.out.print("..");
-                } else {
                     System.out.print(renderIcon(entity.getIcon()));
-                }
             }
             System.out.println();
         }
@@ -44,6 +40,7 @@ public class MapRenderer {
             case "grass": return "\ud83c\udf31";
             case "tree": return "\uD83C\uDF33";
             case "rock": return "\uD83E\uDEA8";
+            case "emptySpot": return "..";
             default: return "X";
         }
     }

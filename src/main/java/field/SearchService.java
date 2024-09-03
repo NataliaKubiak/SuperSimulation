@@ -2,8 +2,10 @@ package field;
 
 import entities.Cell;
 import entities.Entity;
+import entities.StaticObjects;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SearchService {
 
@@ -31,6 +33,19 @@ public class SearchService {
 //                neighbourCells.add(c);
 //            }
 //        }
+    }
+
+    public HashMap<Cell, Entity> filterMap() {
+        HashMap<Cell, Entity> filteredMap = map.entrySet()
+                .stream()
+                .filter(entry -> !(entry.getValue() instanceof StaticObjects))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        HashMap::new
+                ));
+        return filteredMap;
     }
 
 }

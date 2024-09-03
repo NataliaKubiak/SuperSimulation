@@ -26,4 +26,7 @@ public class Field {
         renderer.renderMap();
     }
 
+    public HashMap<Cell, Entity> getMap() {
+        return map;
+    }
 }

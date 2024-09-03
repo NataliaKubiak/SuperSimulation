@@ -26,7 +26,7 @@ public class InitActions extends Actions {
         for (int y = 0; y < SIZE; y++) {
             for (int x = 0; x < SIZE; x++) {
                 Cell cell = new Cell(x, y);
-                map.put(cell, null);
+                map.put(cell, new EmptySpot());
 //                System.out.println("-".repeat(30));
 //                System.out.println("Coordinates: x = " + x + " y = " + y);
 //                System.out.println("Neighbour cells: " + cell.getNeighbourCells());
@@ -46,19 +46,19 @@ public class InitActions extends Actions {
             int index = random.nextInt(5);
             switch (index) {
                 case 0:
-                    map.put(cell, new Rock(cell));
+                    map.put(cell, new Rock());
                     break;
                 case 1:
-                    map.put(cell, new Tree(cell));
+                    map.put(cell, new Tree());
                     break;
                 case 2:
-                    map.put(cell, new Grass(cell));
+                    map.put(cell, new Grass());
                     break;
                 case 3:
-                    map.put(cell, new Predator(cell));
+                    map.put(cell, new Predator());
                     break;
                 case 4:
-                    map.put(cell, new Herbivore(cell));
+                    map.put(cell, new Herbivore());
                     break;
             }
         }

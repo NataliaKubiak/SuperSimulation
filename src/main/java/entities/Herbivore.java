@@ -2,16 +2,15 @@ package entities;
 
 public class Herbivore extends Creature {
 
-    public Herbivore(Cell cell) {
+    public Herbivore() {
         super("bunny",
-                cell,
                 1,
                 100);
     }
 
-    @Override
-    public void makeMove() {
-        int newX = cell.getX() + speed;
-        cell.setX(newX);
-    }
+//    @Override
+//    public void makeMove() {
+//        int newX = cell.getX() + speed;
+//        cell.setX(newX);
+//    }
 }

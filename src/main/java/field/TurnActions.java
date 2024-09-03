@@ -18,16 +18,17 @@ public class TurnActions extends Actions {
 
         //swap values
         //hhh.put(a, hhh.put(b, hhh.get(a)));
-        for (Cell xy : tempMap.keySet()) {
-            if (tempMap.get(xy) instanceof Predator predator) {
-                predator.makeMove();
-                Cell newXY = predator.getCoordinates();
-                map.put(xy, map.put(newXY, map.get(xy)));
-            } else if (tempMap.get(xy) instanceof Herbivore herbivore) {
-                herbivore.makeMove();
-                Cell newXY = herbivore.getCoordinates();
-                map.put(xy, map.put(newXY, map.get(xy)));
-            }
-        }
+        //TODO rewrite it if Entity doesn't have any Coordinates info
+//        for (Cell xy : tempMap.keySet()) {
+//            if (tempMap.get(xy) instanceof Predator predator) {
+//                predator.makeMove();
+//                Cell newXY = predator.getCoordinates();
+//                map.put(xy, map.put(newXY, map.get(xy)));
+//            } else if (tempMap.get(xy) instanceof Herbivore herbivore) {
+//                herbivore.makeMove();
+//                Cell newXY = herbivore.getCoordinates();
+//                map.put(xy, map.put(newXY, map.get(xy)));
+//            }
+//        }
     }
 }
