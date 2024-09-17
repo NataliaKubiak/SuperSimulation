@@ -4,16 +4,16 @@ public class Predator extends Creature {
 
     protected int attackPower;
 
-    public Predator() {
+    public Predator(Cell cell) {
         super("tiger",
                 2,
-                100);
+                100,
+                cell);
         this.attackPower = 5;
     }
 
-//    @Override
-//    public void makeMove() {
-//        int newX = cell.getX() + speed;
-//        cell.setX(newX);
-//    }
+    @Override
+    public void makeMove(Cell cell) {
+        this.cell = cell;
+    }
 }

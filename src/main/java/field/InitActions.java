@@ -7,13 +7,13 @@ import java.util.Random;
 
 public class InitActions extends Actions {
 
-    private HashMap<Cell, Entity> map;
-    private final int SIZE;
+    private HashMap<Cell, Entity> field;
+    private final int FIELD_SIZE;
     private final int ENTITIES_AMOUNT;
 
-    public InitActions(HashMap<Cell, Entity> map, int SIZE, int ENTITIES_AMOUNT) {
-        this.map = map;
-        this.SIZE = SIZE;
+    public InitActions(HashMap<Cell, Entity> field, int FIELD_SIZE, int ENTITIES_AMOUNT) {
+        this.field = field;
+        this.FIELD_SIZE = FIELD_SIZE;
         this.ENTITIES_AMOUNT = ENTITIES_AMOUNT;
     }
 
@@ -23,13 +23,10 @@ public class InitActions extends Actions {
     }
 
     private void generateEmptyMap() {
-        for (int y = 0; y < SIZE; y++) {
-            for (int x = 0; x < SIZE; x++) {
+        for (int y = 0; y < FIELD_SIZE; y++) {
+            for (int x = 0; x < FIELD_SIZE; x++) {
                 Cell cell = new Cell(x, y);
-                map.put(cell, new EmptySpot());
-//                System.out.println("-".repeat(30));
-//                System.out.println("Coordinates: x = " + x + " y = " + y);
-//                System.out.println("Neighbour cells: " + cell.getNeighbourCells());
+                field.put(cell, new EmptySpot());
             }
         }
     }
@@ -39,26 +36,26 @@ public class InitActions extends Actions {
         Random random = new Random();
 
         for (int i = 0; i < ENTITIES_AMOUNT; i++) {
-            int x = random.nextInt(SIZE + 1);
-            int y = random.nextInt(SIZE + 1);
+            int x = random.nextInt(FIELD_SIZE);
+            int y = random.nextInt(FIELD_SIZE);
             Cell cell = new Cell(x, y);
 
             int index = random.nextInt(5);
             switch (index) {
                 case 0:
-                    map.put(cell, new Rock());
+                    field.put(cell, new Rock());
                     break;
                 case 1:
-                    map.put(cell, new Tree());
+                    field.put(cell, new Tree());
                     break;
                 case 2:
-                    map.put(cell, new Grass());
+                    field.put(cell, new Grass());
                     break;
                 case 3:
-                    map.put(cell, new Predator());
+                    field.put(cell, new Predator(cell));
                     break;
                 case 4:
-                    map.put(cell, new Herbivore());
+                    field.put(cell, new Herbivore(cell));
                     break;
             }
         }

@@ -5,21 +5,21 @@ import entities.Entity;
 
 import java.util.HashMap;
 
-public class MapRenderer {
+public class FieldRenderer {
 
-    private HashMap<Cell, Entity> map;
-    private final int MAP_SIZE;
+    private HashMap<Cell, Entity> field;
+    private final int FIELD_SIZE;
 
-    public MapRenderer(HashMap<Cell, Entity> map, int mapSize) {
-        this.map = map;
-        MAP_SIZE = mapSize;
+    public FieldRenderer(HashMap<Cell, Entity> field, int fieldSize) {
+        this.field = field;
+        FIELD_SIZE = fieldSize;
     }
 
-    public void renderMap() {
+    public void renderField() {
 
-        for (int y = 0; y < MAP_SIZE; y++) {
-            for (int x = 0; x < MAP_SIZE; x++) {
-                Entity entity = map.get(new Cell(x, y));
+        for (int y = 0; y < FIELD_SIZE; y++) {
+            for (int x = 0; x < FIELD_SIZE; x++) {
+                Entity entity = field.get(new Cell(x, y));
 
                     System.out.print(renderIcon(entity.getIcon()));
             }
@@ -28,7 +28,7 @@ public class MapRenderer {
     }
 
     public void moveCursorToStart() {
-        for (int i = 0; i < MAP_SIZE; i++) {
+        for (int i = 0; i < FIELD_SIZE; i++) {
             System.out.print("\u001B[A");
         }
     }
