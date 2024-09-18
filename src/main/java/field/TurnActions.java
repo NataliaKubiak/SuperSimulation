@@ -1,11 +1,15 @@
 package field;
 
 import entities.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class TurnActions extends Actions {
+
+    private static final Logger logger = LogManager.getLogger();
 
     private HashMap<Cell, Entity> field;
     private int fieldSize;
@@ -38,12 +42,23 @@ public class TurnActions extends Actions {
         if (entry.getValue() instanceof Predator) {
             newX = entry.getKey().getX() + 1;
             newY = entry.getKey().getY();
+            logger.info("{}:{} made move!",
+                    entry.getValue().getIcon(),
+                    entry.getValue().getId());
         } else if (entry.getValue() instanceof Herbivore) {
             newX = entry.getKey().getX();
             newY = entry.getKey().getY() - 1;
+            logger.info("{}:{} made move!",
+                    entry.getValue().getIcon(),
+                    entry.getValue().getId());
         }
+        logger.info("NewX = {}", newX);
+        logger.info("NewY = {}", newY);
 
-        return new Cell(loopField(newX), loopField(newY));
+        Cell newCell = new Cell(loopField(newX), loopField(newY));
+        logger.info("newCell X = {}", newCell.getX());
+        logger.info("newCell Y = {}", newCell.getY());
+        return newCell;
     }
 
     private int loopField(int x) {
