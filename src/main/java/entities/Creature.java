@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.List;
+
 public abstract class Creature extends Entity {
 
     protected int speed;
@@ -16,5 +18,5 @@ public abstract class Creature extends Entity {
         this.cell = cell;
     }
 
-    public abstract void makeMove(Cell cell);
+    public abstract void makeMove(List<Cell> path);
 }

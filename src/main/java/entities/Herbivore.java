@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.List;
+
 public class Herbivore extends Creature {
 
     public Herbivore(Cell cell) {
@@ -10,7 +12,9 @@ public class Herbivore extends Creature {
     }
 
     @Override
-    public void makeMove(Cell cell) {
-        this.cell = cell;
+    public void makeMove(List<Cell> path) {
+
+        //if path = sequence of cells to Grass -> 1 move = cell from sequence at the index speed - 1
+        this.cell = path.get(speed - 1);
     }
 }

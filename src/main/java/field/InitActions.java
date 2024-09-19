@@ -7,13 +7,10 @@ import java.util.Random;
 
 public class InitActions extends Actions {
 
-    private HashMap<Cell, Entity> field;
-    private final int FIELD_SIZE;
     private final int ENTITIES_AMOUNT;
 
     public InitActions(HashMap<Cell, Entity> field, int FIELD_SIZE, int ENTITIES_AMOUNT) {
-        this.field = field;
-        this.FIELD_SIZE = FIELD_SIZE;
+        super(field, FIELD_SIZE);
         this.ENTITIES_AMOUNT = ENTITIES_AMOUNT;
     }
 
