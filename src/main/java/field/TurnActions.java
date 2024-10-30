@@ -1,11 +1,9 @@
 package field;
 
-import entities.Cell;
-import entities.Entity;
-import entities.Herbivore;
-import entities.Predator;
+import entities.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TurnActions extends Actions {
@@ -16,37 +14,60 @@ public class TurnActions extends Actions {
         super(field, FIELD_SIZE);
     }
 
-//    public void oneStepForAllCreatures() {
-//        HashMap<Cell, Entity> tempMap = new HashMap<>();
-//        tempMap.putAll(field);
-//
-//        for (Map.Entry<Cell, Entity> entry : tempMap.entrySet()) {
-//            if (entry.getValue() instanceof Creature) {
-//                Cell newCoordinates = fakeSearch(entry);
-//                ((Creature) entry.getValue()).makeMove(newCoordinates);
-//                field.put(newCoordinates, entry.getValue());
-//                field.put(entry.getKey(), new EmptySpot());
-//            }
-//        }
-//    }
+    public void oneStepForAllCreatures(FieldRenderer renderer, Cell creatureCoord) throws InterruptedException {
+        Creature creature = (Creature) field.get(creatureCoord);
 
-    public Cell findFirstPredator() {
+        SearchService searchService = new SearchService(field, FIELD_SIZE, creatureCoord);
 
-        for (Map.Entry<Cell, Entity> entry : field.entrySet()) {
-            if (entry.getValue() instanceof Predator) {
-                return entry.getKey();
-            }
+        List<Cell> pathToGoalObj = searchService.findPathToGoalObject();
+
+        for (int i = 0; i < pathToGoalObj.size() - 1 ; i++) {
+            Cell stepToGoalCell = pathToGoalObj.get(i);
+            field.put(stepToGoalCell, new WayToGoalObj());
         }
-        return new Cell(-1, -1);
+        renderer.moveCursorToStart();
+        renderer.renderField();
+
+        int creatureSpeed = creature.getSpeed();
+
+        for (int i = 0; i < creatureSpeed; i++) {
+            Cell oldCoord = creature.getCell();
+            creature.makeMove(pathToGoalObj, i);
+            field.put(oldCoord, new EmptySpot());
+            field.put(creature.getCell(), creature);
+
+            renderer.moveCursorToStart();
+            renderer.renderField();
+            Thread.sleep(700);
+        }
     }
 
-    public Cell findFirstHerbivore() {
+    public List<Cell> findAllPredators() {
 
-        for (Map.Entry<Cell, Entity> entry : field.entrySet()) {
-            if (entry.getValue() instanceof Herbivore) {
-                return entry.getKey();
-            }
-        }
-        return new Cell(-1, -1);
+        return field.entrySet().stream()
+                .filter(e -> e.getValue() instanceof Predator)
+                .map(Map.Entry::getKey)
+                .toList();
+    }
+
+    public List<Cell> findAllHerbivores() {
+
+        return field.entrySet().stream()
+                .filter(e -> e.getValue() instanceof Herbivore)
+                .map(Map.Entry::getKey)
+                .toList();
+    }
+
+    public List<Cell> findAllCreatures() {
+
+        return field.entrySet().stream()
+                .filter(e -> e.getValue() instanceof Herbivore ||
+                        e.getValue() instanceof Predator)
+                .map(Map.Entry::getKey)
+                .toList();
+    }
+
+        public void clearPawSteps() {
+
     }
 }

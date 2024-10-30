@@ -1,17 +1,16 @@
 package field;
 
-import entities.Cell;
-import entities.Entity;
-import entities.WayToGoalObj;
+import entities.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Field {
 
     private HashMap<Cell, Entity> field = new HashMap<>();
-    private static final int ENTITIES_AMOUNT = 20;
-    private static final int FIELD_SIZE = 20;
+    private static final int ENTITIES_AMOUNT = 60;
+    private static final int FIELD_SIZE = 30;
 
     private InitActions initActions = new InitActions(field, FIELD_SIZE, ENTITIES_AMOUNT);
     private TurnActions turnActions = new TurnActions(field, FIELD_SIZE);
@@ -22,10 +21,13 @@ public class Field {
         renderer.renderField();
     }
 
-    public void nextTurn() {
-//        turnActions.oneStepForAllCreatures();
-        renderer.moveCursorToStart();
-        renderer.renderField();
+    public void nextTurn() throws InterruptedException {
+        List<Cell> allCreatures = turnActions.findAllCreatures();
+
+        for (Cell creatureCell : allCreatures) {
+            turnActions.oneStepForAllCreatures(renderer, creatureCell);
+        }
+        Thread.sleep(1500);
     }
 
     public HashMap<Cell, Entity> getField() {
@@ -34,22 +36,15 @@ public class Field {
 
     //method for testing SearchService
     public void searchActions() {
-        Cell firstHerbivoreCoord = turnActions.findFirstPredator();
-        SearchService searchService = new SearchService(field, FIELD_SIZE, firstHerbivoreCoord);
 
-        List<Cell> pathToGrass = searchService.findPathToGoalObject();
+        List<Cell> eee = field.entrySet().stream()
+                .filter(e -> e.getValue() instanceof Herbivore ||
+                        e.getValue() instanceof Predator)
+                .map(Map.Entry::getKey)
+                .toList();
 
-
-        for (int i = 0; i < pathToGrass.size() - 1 ; i++) {
-            Cell stepToGoalCell = pathToGrass.get(i);
-            field.put(stepToGoalCell, new WayToGoalObj());
+        for (Cell cell : eee) {
+            System.out.println(field.get(cell));
         }
-
-        System.out.println("first obj Coord = " + firstHerbivoreCoord);
-        System.out.println("This is hopefully path!!!!!!!!\n" + pathToGrass);
-
-        renderer.renderField();
-
-
     }
 }

@@ -18,5 +18,13 @@ public abstract class Creature extends Entity {
         this.cell = cell;
     }
 
-    public abstract void makeMove(List<Cell> path);
+    public abstract void makeMove(List<Cell> path, int stepIndex);
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public Cell getCell() {
+        return cell;
+    }
 }

@@ -9,13 +9,12 @@ public class Main {
         Field field = new Field();
         field.startSimulation();
 
-//        while (true) {
-//
-//            Thread.sleep(1500);
-//            field.nextTurn();
-//        }
+        while (true) {
 
-        field.searchActions();
+            field.nextTurn();
+        }
 
+//        field.searchActions();
+//        System.out.println("");
     }
 }

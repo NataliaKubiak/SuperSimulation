@@ -6,15 +6,18 @@ public class Herbivore extends Creature {
 
     public Herbivore(Cell cell) {
         super("bunny",
-                1,
+                2,
                 100,
                 cell);
     }
 
     @Override
-    public void makeMove(List<Cell> path) {
+    public void makeMove(List<Cell> path, int stepIndex) {
 
-        //if path = sequence of cells to Grass -> 1 move = cell from sequence at the index speed - 1
-        this.cell = path.get(speed - 1);
+        if (path.size() <= stepIndex) {
+            this.cell = path.get(0);
+        } else {
+            this.cell = path.get(stepIndex);
+        }
     }
 }

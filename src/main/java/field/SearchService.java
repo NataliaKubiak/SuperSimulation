@@ -51,7 +51,8 @@ public class SearchService extends Actions {
             filteredField = field.entrySet()
                     .stream()
                     .filter(entry -> (entry.getValue() instanceof EmptySpot) ||
-                            (entry.getValue() instanceof Herbivore))
+                            (entry.getValue() instanceof Herbivore) ||
+                            (entry.getValue() instanceof WayToGoalObj))
                     .collect(Collectors.toMap(
                             Map.Entry::getKey,
                             Map.Entry::getValue,
@@ -62,7 +63,8 @@ public class SearchService extends Actions {
             filteredField = field.entrySet()
                     .stream()
                     .filter(entry -> (entry.getValue() instanceof EmptySpot) ||
-                            (entry.getValue() instanceof Grass))
+                            (entry.getValue() instanceof Grass) ||
+                            (entry.getValue() instanceof WayToGoalObj))
                     .collect(Collectors.toMap(
                             Map.Entry::getKey,
                             Map.Entry::getValue,

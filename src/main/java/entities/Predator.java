@@ -8,16 +8,20 @@ public class Predator extends Creature {
 
     public Predator(Cell cell) {
         super("tiger",
-                2,
+                4,
                 100,
                 cell);
         this.attackPower = 5;
     }
 
     @Override
-    public void makeMove(List<Cell> path) {
+    public void makeMove(List<Cell> path, int stepIndex) {
 
-        //if path = sequence of cells to Herbivore -> 1 move = cell from sequence at the index speed - 1
-        this.cell = path.get(speed - 1);
+        //TODO переписать перепрыгивание на 0, чтобы перепрыгивало на нужную клетку
+        if (path.size() <= stepIndex) {
+            this.cell = path.get(0);
+        } else {
+            this.cell = path.get(stepIndex);
+        }
     }
 }
