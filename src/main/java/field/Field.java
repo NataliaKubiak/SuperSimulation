@@ -25,11 +25,16 @@ public class Field {
         renderer.renderField();
     }
 
-    public void nextTurn() throws InterruptedException {
+    public void stopSimulation() {
+        initActions.stop();
+    }
+
+    public boolean nextTurn() throws InterruptedException {
+        boolean flag = true;
         List<Cell> allCreatures = turnActions.findAllCreatures();
 
         for (Cell creatureCell : allCreatures) {
-            turnActions.oneStepForCreature(renderer, creatureCell, PAUSE_BETWEEN_STEPS_MILLIS);
+            flag = turnActions.oneStepForCreature(renderer, creatureCell, PAUSE_BETWEEN_STEPS_MILLIS);
         }
         Thread.sleep(PAUSE_BETWEEN_STEPS_MILLIS);
 
@@ -37,9 +42,6 @@ public class Field {
         roundActions.addGrass(GRASS_ADDITION);
         roundActions.addHerbivores(HERBIVORES_ADDITION);
         Thread.sleep(PAUSE_BETWEEN_STEPS_MILLIS);
-    }
-
-    public HashMap<Cell, Entity> getField() {
-        return field;
+        return flag;
     }
 }

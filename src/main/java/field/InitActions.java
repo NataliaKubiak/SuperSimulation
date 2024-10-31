@@ -19,6 +19,10 @@ public class InitActions extends Actions {
         initEntities();
     }
 
+    public void stop() {
+        System.out.println("The simulation STOPPED coz there is no rabbits or grass left :'(");
+    }
+
     private void generateEmptyMap() {
         for (int y = 0; y < FIELD_SIZE; y++) {
             for (int x = 0; x < FIELD_SIZE; x++) {

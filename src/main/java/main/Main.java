@@ -9,11 +9,11 @@ public class Main {
         Field field = new Field();
         field.startSimulation();
 
-        while (true) {
+        boolean flag = true;
+        while (flag) {
 
-            field.nextTurn();
+            flag = field.nextTurn();
         }
-
-//        System.out.println("\uD83D\uDE05");
+        field.stopSimulation();
     }
 }
