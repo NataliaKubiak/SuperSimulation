@@ -27,4 +27,8 @@ public abstract class Creature extends Entity {
     public Cell getCell() {
         return cell;
     }
+
+    public int getHP() {
+        return HP;
+    }
 }

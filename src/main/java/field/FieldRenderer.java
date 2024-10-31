@@ -36,6 +36,7 @@ public class FieldRenderer {
     private String renderIcon(String iconName) {
         switch (iconName) {
             case "bunny": return "\ud83d\udc30";
+            case "survival": return "\uD83D\uDE05";
             case "tiger": return "\ud83d\udc2f";
             case "grass": return "\ud83c\udf31";
             case "tree": return "\uD83C\uDF33";

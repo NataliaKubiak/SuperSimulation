@@ -14,36 +14,67 @@ public class TurnActions extends Actions {
         super(field, FIELD_SIZE);
     }
 
-    public void oneStepForAllCreatures(FieldRenderer renderer, Cell creatureCoord) throws InterruptedException {
+    public void oneStepForAllCreatures(FieldRenderer renderer, Cell creatureCoord, int pauseMillis) throws InterruptedException {
         Creature creature = (Creature) field.get(creatureCoord);
 
         SearchService searchService = new SearchService(field, FIELD_SIZE, creatureCoord);
 
         List<Cell> pathToGoalObj = searchService.findPathToGoalObject();
+        int pathSize = pathToGoalObj.size();
 
-        for (int i = 0; i < pathToGoalObj.size() - 1 ; i++) {
-            Cell stepToGoalCell = pathToGoalObj.get(i);
-            field.put(stepToGoalCell, new WayToGoalObj());
-        }
-        renderer.moveCursorToStart();
-        renderer.renderField();
+        createPawStepsWay(pathSize, pathToGoalObj);
+        renderChangesOnField(renderer);
 
         int creatureSpeed = creature.getSpeed();
 
         for (int i = 0; i < creatureSpeed; i++) {
-            Cell oldCoord = creature.getCell();
-            creature.makeMove(pathToGoalObj, i);
-            field.put(oldCoord, new EmptySpot());
-            field.put(creature.getCell(), creature);
+            if (i < pathSize) {
+                if (i == pathSize - 1) {
+                    Cell goalObjCell = pathToGoalObj.get(pathSize - 1);
+                    Entity goalObj = field.get(goalObjCell);
+                    if (goalObj instanceof Herbivore) {
+                        attackOrKillHerbivore((Herbivore) goalObj, creature, pathToGoalObj, i);
+                    } else {
+                        moveCreature(creature, pathToGoalObj, i);
+                    }
+                } else {
+                    moveCreature(creature, pathToGoalObj, i);
+                }
+                renderChangesOnField(renderer);
+                Thread.sleep(pauseMillis);
+            }
+        }
+    }
 
-            renderer.moveCursorToStart();
-            renderer.renderField();
-            Thread.sleep(700);
+    private void createPawStepsWay(int pathSize, List<Cell> pathToGoalObj) {
+        for (int i = 0; i < pathSize - 1 ; i++) {
+            Cell stepToGoalCell = pathToGoalObj.get(i);
+            field.put(stepToGoalCell, new WayToGoalObj());
+        }
+    }
+
+    private void renderChangesOnField(FieldRenderer renderer) {
+        renderer.moveCursorToStart();
+        renderer.renderField();
+    }
+
+    private void moveCreature(Creature creature, List<Cell> pathToGoalObj, int i) {
+        Cell oldCoord = creature.getCell();
+        creature.makeMove(pathToGoalObj, i);
+        field.put(oldCoord, new EmptySpot());
+        field.put(creature.getCell(), creature);
+    }
+
+    private void attackOrKillHerbivore(Herbivore goalObj, Creature creature, List<Cell> pathToGoalObj, int i) {
+        int bunnyHp = goalObj.getHP();
+        if ( bunnyHp > 50) {
+            goalObj.attacked();
+        } else {
+            moveCreature(creature, pathToGoalObj, i);
         }
     }
 
     public List<Cell> findAllPredators() {
-
         return field.entrySet().stream()
                 .filter(e -> e.getValue() instanceof Predator)
                 .map(Map.Entry::getKey)
@@ -51,7 +82,6 @@ public class TurnActions extends Actions {
     }
 
     public List<Cell> findAllHerbivores() {
-
         return field.entrySet().stream()
                 .filter(e -> e.getValue() instanceof Herbivore)
                 .map(Map.Entry::getKey)
@@ -59,15 +89,10 @@ public class TurnActions extends Actions {
     }
 
     public List<Cell> findAllCreatures() {
-
         return field.entrySet().stream()
                 .filter(e -> e.getValue() instanceof Herbivore ||
                         e.getValue() instanceof Predator)
                 .map(Map.Entry::getKey)
                 .toList();
-    }
-
-        public void clearPawSteps() {
-
     }
 }

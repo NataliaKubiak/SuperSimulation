@@ -14,7 +14,6 @@ public class Main {
             field.nextTurn();
         }
 
-//        field.searchActions();
-//        System.out.println("");
+//        System.out.println("\uD83D\uDE05");
     }
 }

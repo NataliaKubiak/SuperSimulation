@@ -9,8 +9,9 @@ import java.util.Map;
 public class Field {
 
     private HashMap<Cell, Entity> field = new HashMap<>();
-    private static final int ENTITIES_AMOUNT = 60;
+    private static final int ENTITIES_AMOUNT = 80;
     private static final int FIELD_SIZE = 30;
+    private static final int PAUSE_BETWEEN_STEPS_MILLIS = 700;
 
     private InitActions initActions = new InitActions(field, FIELD_SIZE, ENTITIES_AMOUNT);
     private TurnActions turnActions = new TurnActions(field, FIELD_SIZE);
@@ -25,9 +26,9 @@ public class Field {
         List<Cell> allCreatures = turnActions.findAllCreatures();
 
         for (Cell creatureCell : allCreatures) {
-            turnActions.oneStepForAllCreatures(renderer, creatureCell);
+            turnActions.oneStepForAllCreatures(renderer, creatureCell, PAUSE_BETWEEN_STEPS_MILLIS);
         }
-        Thread.sleep(1500);
+        Thread.sleep(PAUSE_BETWEEN_STEPS_MILLIS);
     }
 
     public HashMap<Cell, Entity> getField() {
