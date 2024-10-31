@@ -41,7 +41,7 @@ public class FieldRenderer {
             case "grass": return "\ud83c\udf31";
             case "tree": return "\uD83C\uDF33";
             case "rock": return "\uD83E\uDEA8";
-            case "wayToGoal": return "\uD83D\uDC3E";
+            case "pawSteps": return "\uD83D\uDC3E";
             case "emptySpot": return ". ";
             default: return "X ";
         }

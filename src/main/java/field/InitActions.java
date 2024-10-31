@@ -16,7 +16,7 @@ public class InitActions extends Actions {
 
     public void start() {
         generateEmptyMap();
-        addEntities();
+        initEntities();
     }
 
     private void generateEmptyMap() {
@@ -28,8 +28,7 @@ public class InitActions extends Actions {
         }
     }
 
-    private void addEntities() {
-
+    private void initEntities() {
         Random random = new Random();
 
         for (int i = 0; i < ENTITIES_AMOUNT; i++) {

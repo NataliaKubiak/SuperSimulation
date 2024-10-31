@@ -14,7 +14,7 @@ public class TurnActions extends Actions {
         super(field, FIELD_SIZE);
     }
 
-    public void oneStepForAllCreatures(FieldRenderer renderer, Cell creatureCoord, int pauseMillis) throws InterruptedException {
+    public void oneStepForCreature(FieldRenderer renderer, Cell creatureCoord, int pauseMillis) throws InterruptedException {
         Creature creature = (Creature) field.get(creatureCoord);
 
         SearchService searchService = new SearchService(field, FIELD_SIZE, creatureCoord);
@@ -49,7 +49,7 @@ public class TurnActions extends Actions {
     private void createPawStepsWay(int pathSize, List<Cell> pathToGoalObj) {
         for (int i = 0; i < pathSize - 1 ; i++) {
             Cell stepToGoalCell = pathToGoalObj.get(i);
-            field.put(stepToGoalCell, new WayToGoalObj());
+            field.put(stepToGoalCell, new PawSteps());
         }
     }
 
