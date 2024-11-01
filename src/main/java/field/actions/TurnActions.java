@@ -56,11 +56,6 @@ public class TurnActions extends Actions {
         }
     }
 
-//    private void renderChangesOnField(FieldRenderer renderer) {
-//        renderer.moveCursorToStart();
-//        renderer.renderField();
-//    }
-
     private void moveCreatureByOneStep(Creature creature, List<Coordinates> pathToGoalObj, int i) {
         Coordinates oldCoord = creature.getCell();
         creature.makeMove(pathToGoalObj, i);

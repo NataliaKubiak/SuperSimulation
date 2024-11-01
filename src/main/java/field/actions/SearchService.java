@@ -11,8 +11,8 @@ public class SearchService extends Actions {
     private Coordinates endCoordinates = null;
     private HashMap<Coordinates, Entity> filteredField = new HashMap<>();
 
-    private Set<Coordinates> visitedCoordinates = new HashSet<>();
-    private Queue<Coordinates> coordinatesQueue = new LinkedList<>();
+    private Set<Coordinates> visitedCells = new HashSet<>();
+    private Queue<Coordinates> cellsQueue = new LinkedList<>();
 
     private HashMap<Coordinates, Coordinates> childParentMap = new HashMap<>();
     private LinkedList<Coordinates> path = new LinkedList<>();
@@ -28,12 +28,12 @@ public class SearchService extends Actions {
     }
 
     private void runSearch() {
-        filteredField = field.filterField(startCoordinates);
-        visitedCoordinates.add(startCoordinates);
-        coordinatesQueue.add(startCoordinates);
+        filteredField = field.filterFieldByInputObject(startCoordinates);
+        visitedCells.add(startCoordinates);
+        cellsQueue.add(startCoordinates);
 
-        while (!coordinatesQueue.isEmpty()) {
-            Coordinates inspectingCoordinates = coordinatesQueue.poll();
+        while (!cellsQueue.isEmpty()) {
+            Coordinates inspectingCoordinates = cellsQueue.poll();
 
             if (isCellContainsGoalObject(inspectingCoordinates)) {
                 endCoordinates = inspectingCoordinates;
@@ -44,17 +44,17 @@ public class SearchService extends Actions {
         }
     }
 
-    private boolean isCellContainsGoalObject(Coordinates inspectingCoordinates) {
+    private boolean isCellContainsGoalObject(Coordinates inspectingCell) {
         Entity entity = field.getEntity(startCoordinates);
 
         if (entity instanceof Predator) {
-            if (filteredField.get(inspectingCoordinates) instanceof Herbivore) {
+            if (filteredField.get(inspectingCell) instanceof Herbivore) {
                 return true;
             } else {
                 return false;
             }
         } else if (entity instanceof Herbivore) {
-            if (filteredField.get(inspectingCoordinates) instanceof Grass) {
+            if (filteredField.get(inspectingCell) instanceof Grass) {
                 return true;
             } else {
                 return false;
@@ -63,9 +63,9 @@ public class SearchService extends Actions {
         return false;
     }
 
-    private void exploreNeighbourCells(Coordinates inspectingCoordinates) {
-        int startX = inspectingCoordinates.getX();
-        int startY = inspectingCoordinates.getY();
+    private void exploreNeighbourCells(Coordinates inspectingCell) {
+        int startX = inspectingCell.getX();
+        int startY = inspectingCell.getY();
 
         Coordinates coordinatesTop = new Coordinates(startX, loopField(startY-1));
         Coordinates coordinatesBottom = new Coordinates(startX, loopField(startY+1));
@@ -74,10 +74,10 @@ public class SearchService extends Actions {
         Set<Coordinates> possibleNeighbours = new HashSet<>(Arrays.asList(coordinatesTop, coordinatesBottom, coordinatesRight, coordinatesLeft));
 
         for (Coordinates neighbourCoordinates : possibleNeighbours) {
-            if (filteredField.containsKey(neighbourCoordinates) && !visitedCoordinates.contains(neighbourCoordinates)) {
-                childParentMap.put(neighbourCoordinates, inspectingCoordinates);
-                visitedCoordinates.add(neighbourCoordinates);
-                coordinatesQueue.add(neighbourCoordinates);
+            if (filteredField.containsKey(neighbourCoordinates) && !visitedCells.contains(neighbourCoordinates)) {
+                childParentMap.put(neighbourCoordinates, inspectingCell);
+                visitedCells.add(neighbourCoordinates);
+                cellsQueue.add(neighbourCoordinates);
             }
         }
     }

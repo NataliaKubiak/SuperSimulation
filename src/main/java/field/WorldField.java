@@ -60,7 +60,7 @@ public class WorldField {
         ).toList();
     }
 
-    public HashMap<Coordinates, Entity> filterField(Coordinates objectCoord) {
+    public HashMap<Coordinates, Entity> filterFieldByInputObject(Coordinates objectCoord) {
         Creature creature = (Creature) field.get(objectCoord);
 
         if (creature instanceof Predator) {
