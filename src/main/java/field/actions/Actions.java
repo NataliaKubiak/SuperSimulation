@@ -1,4 +1,4 @@
-package field;
+package field.actions;
 
 import entities.Cell;
 import entities.Entity;

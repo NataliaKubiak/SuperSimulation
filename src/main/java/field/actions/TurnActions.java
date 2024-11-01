@@ -1,6 +1,7 @@
-package field;
+package field.actions;
 
 import entities.*;
+import field.FieldRenderer;
 
 import java.util.HashMap;
 import java.util.List;

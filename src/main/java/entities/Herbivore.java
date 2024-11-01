@@ -1,23 +1,22 @@
 package entities;
 
-import java.util.List;
-
 public class Herbivore extends Creature {
+
+    private int HP;
 
     public Herbivore(Cell cell) {
         super("bunny",
                 3,
-                100,
                 cell);
-    }
-
-    @Override
-    public void makeMove(List<Cell> path, int stepIndex) {
-            this.cell = path.get(stepIndex);
+        this.HP = 100;
     }
 
     public void attacked() {
         this.HP = HP - 50;
         this.icon = "survival";
+    }
+
+    public int getHP() {
+        return HP;
     }
 }

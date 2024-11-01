@@ -1,4 +1,4 @@
-package field;
+package field.actions;
 
 import entities.*;
 
@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class RoundActions extends Actions {
+
     public RoundActions(HashMap<Cell, Entity> field, int FIELD_SIZE) {
         super(field, FIELD_SIZE);
     }

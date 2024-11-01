@@ -1,6 +1,6 @@
 package entities;
 
-public class PawSteps extends Entity {
+public class PawSteps extends StaticObjects {
 
     public PawSteps() {
         super("pawSteps");

@@ -7,6 +7,16 @@ import java.util.HashMap;
 
 public class FieldRenderer {
 
+    private static final String ANSI_UP_ONE_LINE = "\u001B[A";
+    private static final String BUNNY_EMOJI = "\ud83d\udc30";
+    private static final String FACE_WITH_SWEAT_EMOJI = "\uD83D\uDE05";
+    private static final String TIGER_EMOJI = "\ud83d\udc2f";
+    private static final String GRASS_EMOJI = "\ud83c\udf31";
+    private static final String TREE_EMOJI = "\uD83C\uDF33";
+    private static final String ROCK_EMOJI = "\uD83E\uDEA8";
+    private static final String PAW_STEPS_EMOJI = "\uD83D\uDC3E";
+    private static final String EMPTY_SPOT = ". ";
+
     private HashMap<Cell, Entity> field;
     private final int FIELD_SIZE;
 
@@ -29,20 +39,20 @@ public class FieldRenderer {
 
     public void moveCursorToStart() {
         for (int i = 0; i < FIELD_SIZE; i++) {
-            System.out.print("\u001B[A");
+            System.out.print(ANSI_UP_ONE_LINE);
         }
     }
 
     private String renderIcon(String iconName) {
         switch (iconName) {
-            case "bunny": return "\ud83d\udc30";
-            case "survival": return "\uD83D\uDE05";
-            case "tiger": return "\ud83d\udc2f";
-            case "grass": return "\ud83c\udf31";
-            case "tree": return "\uD83C\uDF33";
-            case "rock": return "\uD83E\uDEA8";
-            case "pawSteps": return "\uD83D\uDC3E";
-            case "emptySpot": return ". ";
+            case "bunny": return BUNNY_EMOJI;
+            case "survival": return FACE_WITH_SWEAT_EMOJI;
+            case "tiger": return TIGER_EMOJI;
+            case "grass": return GRASS_EMOJI;
+            case "tree": return TREE_EMOJI;
+            case "rock": return ROCK_EMOJI;
+            case "pawSteps": return PAW_STEPS_EMOJI;
+            case "emptySpot": return EMPTY_SPOT;
             default: return "X ";
         }
     }

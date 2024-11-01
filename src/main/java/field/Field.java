@@ -2,19 +2,22 @@ package field;
 
 import entities.Cell;
 import entities.Entity;
+import field.actions.InitActions;
+import field.actions.RoundActions;
+import field.actions.TurnActions;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class Field {
 
-    private HashMap<Cell, Entity> field = new HashMap<>();
-    private static final int ENTITIES_AMOUNT = 20;
+    private static final int ENTITIES_AMOUNT = 50;
     private static final int FIELD_SIZE = 30;
     private static final int PAUSE_BETWEEN_STEPS_MILLIS = 600;
     private static final int GRASS_ADDITION = 10;
     private static final int HERBIVORES_ADDITION = 6;
 
+    private HashMap<Cell, Entity> field = new HashMap<>();
     private InitActions initActions = new InitActions(field, FIELD_SIZE, ENTITIES_AMOUNT);
     private TurnActions turnActions = new TurnActions(field, FIELD_SIZE);
     private RoundActions roundActions = new RoundActions(field, FIELD_SIZE);
