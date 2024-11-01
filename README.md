@@ -58,3 +58,9 @@ Ensure you have the following installed:
    ```
 
 ## Project Structure
+
+![Screenshot 2024-11-01 at 18 23 43](https://github.com/user-attachments/assets/effb5577-92c8-4e96-8a9a-da1249f0b647)
+
+![Screenshot 2024-11-01 at 18 34 16](https://github.com/user-attachments/assets/d9b88f15-bc9c-42d3-8611-944dc4b5e08d)
+
+![Screenshot 2024-11-01 at 18 33 36](https://github.com/user-attachments/assets/817a9af8-7b9b-4eb9-aefd-1baf9e77addc)
