@@ -1,52 +1,43 @@
 package field.actions;
 
 import entities.*;
+import field.WorldField;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class RoundActions extends Actions {
 
-    public RoundActions(HashMap<Cell, Entity> field, int FIELD_SIZE) {
-        super(field, FIELD_SIZE);
+    public RoundActions(WorldField field) {
+        super(field);
     }
 
     public void addGrass(int amount) {
         Random random = new Random();
-        List<Cell> emptySpotsCoord = findAllEmptySpots();
+        List<Coordinates> allGroundCells = field.findAllCellsWith(Ground.class);
 
         for (int i = 0; i <= amount; i++) {
-            int randomCellIndex = random.nextInt(emptySpotsCoord.size());
-            Cell randomEmptyCell = emptySpotsCoord.get(randomCellIndex);
-            field.put(randomEmptyCell, new Grass());
+            int randomCellIndex = random.nextInt(allGroundCells.size());
+            Coordinates randomGroundCell = allGroundCells.get(randomCellIndex);
+            field.placeEntity(randomGroundCell, new Grass());
         }
     }
 
     public void addHerbivores(int amount) {
         Random random = new Random();
-        List<Cell> emptySpotsCoord = findAllEmptySpots();
+        List<Coordinates> allGroundCells = field.findAllCellsWith(Ground.class);
 
         for (int i = 0; i <= amount; i++) {
-            int randomCellIndex = random.nextInt(emptySpotsCoord.size());
-            Cell randomEmptyCell = emptySpotsCoord.get(randomCellIndex);
-            field.put(randomEmptyCell, new Herbivore(randomEmptyCell));
+            int randomCellIndex = random.nextInt(allGroundCells.size());
+            Coordinates randomGroundCell = allGroundCells.get(randomCellIndex);
+            field.placeEntity(randomGroundCell, new Herbivore(randomGroundCell));
         }
     }
 
-    private List<Cell> findAllEmptySpots() {
-        return field.entrySet().stream()
-                .filter(e -> e.getValue() instanceof EmptySpot)
-                .map(Map.Entry::getKey)
-                .toList();
-    }
-
     public void clearPawSteps() {
-        for (Map.Entry<Cell, Entity> entry : field.entrySet()) {
-            if (entry.getValue() instanceof PawSteps) {
-                field.put(entry.getKey(), new EmptySpot());
-            }
+        List<Coordinates> allPawCoordinates = field.findAllCellsWith(PawSteps.class);
+        for (Coordinates coordinates : allPawCoordinates) {
+            field.removeEntity(coordinates);
         }
     }
 }

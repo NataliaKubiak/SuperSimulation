@@ -1,19 +1,19 @@
 package main;
 
-import field.Field;
+import field.Simulation;
 
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Field field = new Field();
-        field.startSimulation();
+        Simulation simulation = new Simulation();
+        simulation.start();
 
         boolean flag = true;
         while (flag) {
 
-            flag = field.nextTurn();
+            flag = simulation.nextTurn();
         }
-        field.stopSimulation();
+        simulation.stop();
     }
 }

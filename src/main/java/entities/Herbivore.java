@@ -4,10 +4,10 @@ public class Herbivore extends Creature {
 
     private int HP;
 
-    public Herbivore(Cell cell) {
+    public Herbivore(Coordinates coordinates) {
         super("bunny",
                 3,
-                cell);
+                coordinates);
         this.HP = 100;
     }
 

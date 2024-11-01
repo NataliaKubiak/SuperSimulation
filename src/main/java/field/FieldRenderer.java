@@ -1,35 +1,32 @@
 package field;
 
-import entities.Cell;
+import entities.Coordinates;
 import entities.Entity;
-
-import java.util.HashMap;
 
 public class FieldRenderer {
 
-    private static final String ANSI_UP_ONE_LINE = "\u001B[A";
-    private static final String BUNNY_EMOJI = "\ud83d\udc30";
-    private static final String FACE_WITH_SWEAT_EMOJI = "\uD83D\uDE05";
-    private static final String TIGER_EMOJI = "\ud83d\udc2f";
-    private static final String GRASS_EMOJI = "\ud83c\udf31";
-    private static final String TREE_EMOJI = "\uD83C\uDF33";
-    private static final String ROCK_EMOJI = "\uD83E\uDEA8";
-    private static final String PAW_STEPS_EMOJI = "\uD83D\uDC3E";
-    private static final String EMPTY_SPOT = ". ";
+    private final String ANSI_UP_ONE_LINE = "\u001B[A";
+    private final String BUNNY_EMOJI = "\ud83d\udc30";
+    private final String FACE_WITH_SWEAT_EMOJI = "\uD83D\uDE05";
+    private final String TIGER_EMOJI = "\ud83d\udc2f";
+    private final String GRASS_EMOJI = "\ud83c\udf31";
+    private final String TREE_EMOJI = "\uD83C\uDF33";
+    private final String ROCK_EMOJI = "\uD83E\uDEA8";
+    private final String PAW_STEPS_EMOJI = "\uD83D\uDC3E";
+    private final String GROUND = ". ";
 
-    private HashMap<Cell, Entity> field;
-    private final int FIELD_SIZE;
+    private WorldField field;
+    private final int fieldSize;
 
-    public FieldRenderer(HashMap<Cell, Entity> field, int fieldSize) {
+    public FieldRenderer(WorldField field) {
         this.field = field;
-        FIELD_SIZE = fieldSize;
+        fieldSize = field.getSize();
     }
 
     public void renderField() {
-
-        for (int y = 0; y < FIELD_SIZE; y++) {
-            for (int x = 0; x < FIELD_SIZE; x++) {
-                Entity entity = field.get(new Cell(x, y));
+        for (int y = 0; y < fieldSize; y++) {
+            for (int x = 0; x < fieldSize; x++) {
+                Entity entity = field.getEntity(new Coordinates(x, y));
 
                     System.out.print(renderIcon(entity.getIcon()));
             }
@@ -37,8 +34,13 @@ public class FieldRenderer {
         }
     }
 
-    public void moveCursorToStart() {
-        for (int i = 0; i < FIELD_SIZE; i++) {
+    public void renderChangesOnField() {
+        moveCursorToStart();
+        renderField();
+    }
+
+    private void moveCursorToStart() {
+        for (int i = 0; i < fieldSize; i++) {
             System.out.print(ANSI_UP_ONE_LINE);
         }
     }
@@ -52,7 +54,7 @@ public class FieldRenderer {
             case "tree": return TREE_EMOJI;
             case "rock": return ROCK_EMOJI;
             case "pawSteps": return PAW_STEPS_EMOJI;
-            case "emptySpot": return EMPTY_SPOT;
+            case "ground": return GROUND;
             default: return "X ";
         }
     }

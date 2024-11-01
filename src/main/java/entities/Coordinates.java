@@ -1,11 +1,11 @@
 package entities;
 
-public class Cell {
+public class Coordinates {
 
     private final int x;
     private final int y;
 
-    public Cell(int x, int y) {
+    public Coordinates(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -23,7 +23,7 @@ public class Cell {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Cell that = (Cell) o;
+        Coordinates that = (Coordinates) o;
         return y == that.y && x == that.x;
     }
 

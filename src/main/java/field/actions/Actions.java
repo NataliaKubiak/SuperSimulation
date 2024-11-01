@@ -1,28 +1,25 @@
 package field.actions;
 
-import entities.Cell;
-import entities.Entity;
-
-import java.util.HashMap;
+import field.WorldField;
 
 public abstract class Actions {
 
-    protected HashMap<Cell, Entity> field;
-    protected final int FIELD_SIZE;
+    protected WorldField field;
+    protected final int fieldSize;
 
-    public Actions(HashMap<Cell, Entity> field, int FIELD_SIZE) {
+    public Actions(WorldField field) {
         this.field = field;
-        this.FIELD_SIZE = FIELD_SIZE;
+        this.fieldSize = field.getSize();
     }
 
     protected int loopField(int x) {
         //base case
-        if (x >= 0 && x < FIELD_SIZE) {
+        if (x >= 0 && x < fieldSize) {
             return x;
         } else if (x < 0) {
-            return loopField(FIELD_SIZE + x);
+            return loopField(fieldSize + x);
         } else {
-            return loopField(x - FIELD_SIZE);
+            return loopField(x - fieldSize);
         }
     }
 }

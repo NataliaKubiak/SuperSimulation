@@ -1,21 +1,18 @@
 package field.actions;
 
 import entities.*;
+import field.WorldField;
 
-import java.util.HashMap;
 import java.util.Random;
 
 public class InitActions extends Actions {
 
-    private final int ENTITIES_AMOUNT;
-
-    public InitActions(HashMap<Cell, Entity> field, int FIELD_SIZE, int ENTITIES_AMOUNT) {
-        super(field, FIELD_SIZE);
-        this.ENTITIES_AMOUNT = ENTITIES_AMOUNT;
+    public InitActions(WorldField field) {
+        super(field);
     }
 
     public void start() {
-        generateEmptyMap();
+        generateEmptyField();
         initEntities();
     }
 
@@ -23,11 +20,11 @@ public class InitActions extends Actions {
         System.out.println("The simulation STOPPED coz there is no rabbits or grass left :'(");
     }
 
-    private void generateEmptyMap() {
-        for (int y = 0; y < FIELD_SIZE; y++) {
-            for (int x = 0; x < FIELD_SIZE; x++) {
-                Cell cell = new Cell(x, y);
-                field.put(cell, new EmptySpot());
+    private void generateEmptyField() {
+        for (int y = 0; y < fieldSize; y++) {
+            for (int x = 0; x < fieldSize; x++) {
+                Coordinates coordinates = new Coordinates(x, y);
+                field.placeEntity(coordinates, new Ground());
             }
         }
     }
@@ -35,27 +32,27 @@ public class InitActions extends Actions {
     private void initEntities() {
         Random random = new Random();
 
-        for (int i = 0; i < ENTITIES_AMOUNT; i++) {
-            int x = random.nextInt(FIELD_SIZE);
-            int y = random.nextInt(FIELD_SIZE);
-            Cell cell = new Cell(x, y);
+        for (int i = 0; i < field.getEntitiesAmount(); i++) {
+            int x = random.nextInt(fieldSize);
+            int y = random.nextInt(fieldSize);
+            Coordinates coordinates = new Coordinates(x, y);
 
             int index = random.nextInt(5);
             switch (index) {
                 case 0:
-                    field.put(cell, new Rock());
+                    field.placeEntity(coordinates, new Rock());
                     break;
                 case 1:
-                    field.put(cell, new Tree());
+                    field.placeEntity(coordinates, new Tree());
                     break;
                 case 2:
-                    field.put(cell, new Grass());
+                    field.placeEntity(coordinates, new Grass());
                     break;
                 case 3:
-                    field.put(cell, new Predator(cell));
+                    field.placeEntity(coordinates, new Predator(coordinates));
                     break;
                 case 4:
-                    field.put(cell, new Herbivore(cell));
+                    field.placeEntity(coordinates, new Herbivore(coordinates));
                     break;
             }
         }

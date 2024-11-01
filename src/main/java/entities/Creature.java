@@ -5,25 +5,25 @@ import java.util.List;
 public abstract class Creature extends Entity {
 
     protected int speed;
-    protected Cell cell;
+    protected Coordinates coordinates;
 
     public Creature(String icon,
                     int speed,
-                    Cell cell) {
+                    Coordinates coordinates) {
         super(icon);
         this.speed = speed;
-        this.cell = cell;
+        this.coordinates = coordinates;
     }
 
-    public void makeMove(List<Cell> path, int stepIndex) {
-        this.cell = path.get(stepIndex);
+    public void makeMove(List<Coordinates> path, int stepIndex) {
+        this.coordinates = path.get(stepIndex);
     }
 
     public int getSpeed() {
         return speed;
     }
 
-    public Cell getCell() {
-        return cell;
+    public Coordinates getCell() {
+        return coordinates;
     }
 }
