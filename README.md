@@ -26,7 +26,7 @@ Predators 🐯 attack herbivores 🐰 upon reaching them. After the first attack
 
 Watch a short demonstration of the project in action below:
 
-[![Project Demo Video](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+![Screen Recording 2024-11-01 at 18 40 41](https://github.com/user-attachments/assets/68ba5e5d-f2c8-45e7-9d8b-3dcc17c65720)
 
 ## Getting Started
 
